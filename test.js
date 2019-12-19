@@ -40,8 +40,8 @@ function movePlayer () {
 		vector[0]/=magn;
 		vector[1]/=magn;
 		if(pos[1]+vector[1]>=0 && pos[0]+vector[0]<=760 && pos[1]+vector[1]<=760 && pos[0]+vector[0]>=0) {
-			pos[0]+=vector[0];
-			pos[1]+=vector[1];
+			pos[0]+=vector[0]*speed;
+			pos[1]+=vector[1]*speed;
 		}
 	}
 }
