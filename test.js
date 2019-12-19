@@ -7,7 +7,8 @@ img.src = "player.png";
 var map=[];
 
 var speed = 2;
-var pos = [400,400];
+var pos = [50,50];
+var screenPos = [400,400];
 var keyPos={ArrowUp:false,ArrowRight:false,ArrowDown:false,ArrowLeft:false};
 var directions=["ArrowUp","ArrowRight","ArrowDown","ArrowLeft"];
 var vectors={ArrowUp:[0,-1],ArrowRight:[1,0],ArrowDown:[0,1],ArrowLeft:[-1,0]};
@@ -22,9 +23,9 @@ document.getElementById("body").onkeyup=(e)=>{
 		keyPos[e.key]=false;
 }
 
-for (var i = 0; i<100; i++) {
+for (var i = 0; i<101; i++) {
 	map.push([]);
-	for (var j = 0; j<100; j++) {
+	for (var j = 0; j<101; j++) {
 		map[i].push({x:i,y:j,id:"grass"});
 	}
 }
@@ -32,7 +33,7 @@ for (var i = 0; i<100; i++) {
 setInterval(Update,10);
 
 function drawPlayer () {
-	ctx.drawImage(img,pos[0],pos[1],40,40);
+	ctx.drawImage(img,screenPos[0],screenPos[1],40,40);
 }
 
 function movePlayer () {
@@ -47,11 +48,11 @@ function movePlayer () {
 	if(magn>0) {
 		vector[0]/=magn;
 		vector[1]/=magn;
-		if(pos[0]+vector[0]*speed<=800 && pos[0]+vector[0]*speed>=0) {
-			pos[0]+=vector[0]*speed;
+		if(screenPos[0]+vector[0]*speed<=800 && screenPos[0]+vector[0]*speed>=0) {
+			screenPos[0]+=vector[0]*speed;
 		}
-		if(pos[1]+vector[1]*speed>=0 && pos[1]+vector[1]*speed<=800) {
-			pos[1]+=vector[1]*speed;
+		if(screenPos[1]+vector[1]*speed>=0 && screenPos[1]+vector[1]*speed<=800) {
+			screenPos[1]+=vector[1]*speed;
 		}
 	}
 }
@@ -66,7 +67,7 @@ function drawTile (x,y,color) {
 function drawMap(){
 	for(var row of map) {
 		for(var tile of row) {
-			drawTile(tile.x*40,tile.y*40,"#4D9939")
+			drawTile((tile.x+pos[0])*40,(tile.y+pos[0])*40,"#4D9939")
 		}
 	}
 }
