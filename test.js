@@ -6,40 +6,18 @@ img.src = "player.png";
 
 var speed = 2;
 var pos = [200,200];
-var keyPos=[false,false,false,false];
+var keyPos={ArrowUp:false,ArrowRight:false,ArrowDown:false,ArrowLeft:false};
+var directions=["ArrowUp","ArrowRight","ArrowDown","ArrowLeft"];
+var vectors={ArrowUp:[0,-1],ArrowRight:[1,0],ArrowDown:[0,1],ArrowLeft:[-1,0]};
 
 document.getElementById("body").onkeydown=(e)=>{
-	switch(e.key){
-		case "ArrowUp":
-			keyPos[0]=true;
-			break;
-		case "ArrowRight":
-			keyPos[1]=true;
-			break;
-		case "ArrowDown":
-			keyPos[2]=true;
-			break;
-		case "ArrowLeft":
-			keyPos[3]=true;
-			break;
-	}
+	if(keyPos[e.key]!==undefined)
+		keyPos[e.key]=true;
 }
 
 document.getElementById("body").onkeyup=(e)=>{
-	switch(e.key){
-		case "ArrowUp":
-			keyPos[0]=false;
-			break;
-		case "ArrowRight":
-			keyPos[1]=false;
-			break;
-		case "ArrowDown":
-			keyPos[2]=false;
-			break;
-		case "ArrowLeft":
-			keyPos[3]=false;
-			break;
-	}
+	if(keyPos[e.key]!==undefined)
+		keyPos[e.key]=false;
 }
 
 
@@ -50,22 +28,30 @@ function drawPlayer () {
 }
 
 function movePlayer () {
-	if(keyPos[0] && pos[1]>=0){
-		pos[1] -= speed;
+	var vector=[0,0];
+	for(var i=0; i<directions.length; i++) {
+		if(keyPos[directions[i]]) {
+			vector[0]+=vectors[directions[i]][0];
+			vector[1]+=vectors[directions[i]][1];
+		}
 	}
-	if(keyPos[1] && pos[0]<=760){
-		pos[0] += speed;
-	}
-	if(keyPos[2] && pos[1]<=760){
-		pos[1] += speed;
-	}
-	if(keyPos[3] && pos[0]>=0){
-		pos[0] -= speed;
+	var magn=Math.sqrt(vector[0]*vector[0]+vector[1]*vector[1]);
+	if(magn>0) {
+		vector[0]/=magn;
+		vector[1]/=magn;
+		if(pos[1]+vector[1]>=0 && pos[0]+vector[0]<=760 && pos[1]+vector[1]<=760 && pos[0]+vector[0]>=0) {
+			pos[0]+=vector[0];
+			pos[1]+=vector[1];
+		}
 	}
 }
 
 function drawTile (x,y) {
 	ctx.fillRect(20, 20, 150, 100);
+}
+
+function drawDude(CTX,x,y) {
+	
 }
 
 function Update (){
