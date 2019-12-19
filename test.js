@@ -47,7 +47,7 @@ function movePlayer () {
 }
 
 function drawTile (x,y) {
-	ctx.fillRect(20, 20, 150, 100);
+	ctx.fillRect(x, y, x+40, y+40);
 }
 
 function drawDude(CTX,x,y) {
