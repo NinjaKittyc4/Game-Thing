@@ -22,9 +22,10 @@ document.getElementById("body").onkeyup=(e)=>{
 		keyPos[e.key]=false;
 }
 
-for (var i = 0; i >100; i++) {
-	for (var j = 0; j >100; j++) {
-	map[i][j]= {x:i,y:j,id:"grass"};
+for (var i = 0; i<100; i++) {
+	map.push([]);
+	for (var j = 0; j<100; j++) {
+		map[i].push({x:i,y:j,id:"grass"});
 	}
 }
 
@@ -46,8 +47,10 @@ function movePlayer () {
 	if(magn>0) {
 		vector[0]/=magn;
 		vector[1]/=magn;
-		if(pos[1]+vector[1]>=0 && pos[0]+vector[0]<=760 && pos[1]+vector[1]<=760 && pos[0]+vector[0]>=0) {
+		if(pos[0]+vector[0]*speed<=760 && pos[0]+vector[0]*speed>=0) {
 			pos[0]+=vector[0]*speed;
+		}
+		if(pos[1]+vector[1]*speed>=0 && pos[1]+vector[1]*speed<=760) {
 			pos[1]+=vector[1]*speed;
 		}
 	}
@@ -55,15 +58,15 @@ function movePlayer () {
 
 function drawTile (x,y,color) {
 	ctx.fillStyle = color;
-	ctx.fillRect(x, y, x+40, y+40);
-	ctx.strokeStyle = "#FFFFFF";
-	ctx.strokeRect(x, y, x+40, y+40);
+	ctx.fillRect(x, y, 40, 40);
+	ctx.strokeStyle = "#000000";
+	ctx.strokeRect(x, y, 40, 40);
 }
 
 function drawMap(){
 	for(var row of map) {
 		for(var tile of row) {
-			drawTile(tile.x,tile.y,"#4D9939")
+			drawTile(tile.x*40,tile.y*40,"#4D9939")
 		}
 	}
 }
@@ -75,5 +78,6 @@ function drawDude(CTX,x,y) {
 function Update (){
 ctx.clearRect(0, 0, canvas.width, canvas.height);
 movePlayer();
+drawMap();
 drawPlayer();
 }
