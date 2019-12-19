@@ -33,7 +33,8 @@ for (var i = 0; i<101; i++) {
 setInterval(Update,10);
 
 function drawPlayer () {
-	ctx.drawImage(img,screenPos[0],screenPos[1],40,40);
+	//ctx.drawImage(img,screenPos[0],screenPos[1],40,40);
+	drawDude(ctx,screenPos[0]+20,screenPos[1]+20,"#000000");
 }
 
 function movePlayer () {
@@ -72,9 +73,16 @@ function drawMap(){
 	}
 }
 
+function drawCircle(CTX,xPos,yPos,radius,color) {
+	CTX.beginPath()
+	CTX.lineWidth=0;
+	CTX.fillStyle=color;
+	CTX.arc(xPos, yPos, radius, 0, 2*Math.PI, true);
+	CTX.fill();
+}
 function drawDude(CTX,x,y,color) {
-	var pathX=[];
-	var pathY=[];
+	var pathX=[20,2,2,20,20,2,-2,-20,-20,-2,-2,-20,-14,0,14,20];
+	var pathY=[20,0,-11,-3,-7,-15,-15,-7,-3,-11,0,20,20,4,20,20];
 	CTX.fillStyle=color;
 	CTX.beginPath();
 	CTX.moveTo(x+pathX[0],y+pathY[0]);
@@ -83,6 +91,7 @@ function drawDude(CTX,x,y,color) {
 	}
 	CTX.closePath();
 	CTX.fill();
+	drawCircle(CTX,x,y-19.5,6.5,color);
 }
 
 function Update (){
