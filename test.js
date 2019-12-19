@@ -4,6 +4,8 @@ var ctx = canvas.getContext("2d");
 var img = new Image();
 img.src = "player.png";
 
+var map=[];
+
 var speed = 2;
 var pos = [200,200];
 var keyPos={ArrowUp:false,ArrowRight:false,ArrowDown:false,ArrowLeft:false};
@@ -20,8 +22,13 @@ document.getElementById("body").onkeyup=(e)=>{
 		keyPos[e.key]=false;
 }
 
+for (var i = 0; i >100; i++) {
+	for (var j = 0; j >100; j++) {
+	map[i][j]= {x:i,y:j,id:"grass"};
+	}
+}
 
-setInterval("Update()",10);
+setInterval(Update,10);
 
 function drawPlayer () {
 	ctx.drawImage(img,pos[0],pos[1],40,40);
@@ -46,8 +53,19 @@ function movePlayer () {
 	}
 }
 
-function drawTile (x,y) {
+function drawTile (x,y,color) {
+	ctx.fillStyle = color;
 	ctx.fillRect(x, y, x+40, y+40);
+	ctx.strokeStyle = "#FFFFFF";
+	ctx.strokeRect(x, y, x+40, y+40);
+}
+
+function drawMap(){
+	for(var row of map) {
+		for(var tile of row) {
+			drawTile(tile.x,tile.y,"#4D9939")
+		}
+	}
 }
 
 function drawDude(CTX,x,y,color) {
