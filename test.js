@@ -37,6 +37,9 @@ function drawPlayer () {
 	//drawDude(ctx,screenPos[0]+20,screenPos[1]+20,"#000000");
 }
 
+var maxEdge=800;
+var minEdge=0;
+
 function movePlayer () {
 	var vector=[0,0];
 	for(var i=0; i<directions.length; i++) {
@@ -49,11 +52,27 @@ function movePlayer () {
 	if(magn>0) {
 		vector[0]/=magn;
 		vector[1]/=magn;
-		if(screenPos[0]+vector[0]*speed<=800 && screenPos[0]+vector[0]*speed>=0) {
+		if(screenPos[0]+vector[0]*speed<=maxEdge && screenPos[0]+vector[0]*speed>=minEdge) {
 			screenPos[0]+=vector[0]*speed;
 		}
-		if(screenPos[1]+vector[1]*speed>=0 && screenPos[1]+vector[1]*speed<=800) {
+		else {
+			if(vector[0]>0) {
+				screenPos[0]=maxEdge;
+			}
+			else {
+				screenPos[0]=minEdge;
+			}
+		}
+		if(screenPos[1]+vector[1]*speed>=minEdge && screenPos[1]+vector[1]*speed<=maxEdge) {
 			screenPos[1]+=vector[1]*speed;
+		}
+		else {
+			if(vector[1]>0) {
+				screenPos[1]=maxEdge;
+			}
+			else {
+				screenPos[1]=minEdge;
+			}
 		}
 	}
 }
