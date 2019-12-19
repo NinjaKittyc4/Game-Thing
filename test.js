@@ -50,8 +50,17 @@ function drawTile (x,y) {
 	ctx.fillRect(x, y, x+40, y+40);
 }
 
-function drawDude(CTX,x,y) {
-	
+function drawDude(CTX,x,y,color) {
+	var pathX=[];
+	var pathY=[];
+	CTX.fillStyle=color;
+	CTX.beginPath();
+	CTX.moveTo(x+pathX[0],y+pathY[0]);
+	for(var i=1; i<pathX.length; i++) {
+		CTX.lineTo(x+pathX[i],y+pathY[i]);
+	}
+	CTX.closePath();
+	CTX.fill();
 }
 
 function Update (){
