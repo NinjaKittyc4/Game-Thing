@@ -33,8 +33,8 @@ for (var i = 0; i<101; i++) {
 setInterval(Update,10);
 
 function drawPlayer () {
-	//ctx.drawImage(img,screenPos[0],screenPos[1],40,40);
-	drawDude(ctx,screenPos[0]+20,screenPos[1]+20,"#000000");
+	ctx.drawImage(img,screenPos[0],screenPos[1],40,40);
+	//drawDude(ctx,screenPos[0]+20,screenPos[1]+20,"#000000");
 }
 
 function movePlayer () {
