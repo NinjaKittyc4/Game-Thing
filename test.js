@@ -7,7 +7,7 @@ img.src = "player.png";
 var map=[];
 
 var speed = 2;
-var pos = [200,200];
+var pos = [400,400];
 var keyPos={ArrowUp:false,ArrowRight:false,ArrowDown:false,ArrowLeft:false};
 var directions=["ArrowUp","ArrowRight","ArrowDown","ArrowLeft"];
 var vectors={ArrowUp:[0,-1],ArrowRight:[1,0],ArrowDown:[0,1],ArrowLeft:[-1,0]};
@@ -47,10 +47,10 @@ function movePlayer () {
 	if(magn>0) {
 		vector[0]/=magn;
 		vector[1]/=magn;
-		if(pos[0]+vector[0]*speed<=760 && pos[0]+vector[0]*speed>=0) {
+		if(pos[0]+vector[0]*speed<=800 && pos[0]+vector[0]*speed>=0) {
 			pos[0]+=vector[0]*speed;
 		}
-		if(pos[1]+vector[1]*speed>=0 && pos[1]+vector[1]*speed<=760) {
+		if(pos[1]+vector[1]*speed>=0 && pos[1]+vector[1]*speed<=800) {
 			pos[1]+=vector[1]*speed;
 		}
 	}
