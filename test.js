@@ -87,7 +87,7 @@ function drawTile (x,y,color) {
 function drawMap(){
 	for(var row of map) {
 		for(var tile of row) {
-			drawTile((tile.x+pos[0])*40,(tile.y+pos[0])*40,"#4D9939")
+			drawTile((tile.x-pos[0])*40,(tile.y-pos[0])*40,"#4D9939");
 		}
 	}
 }
